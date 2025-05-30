@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabitha Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #0ea5e9;
+            --gray: #64748b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(30, 41, 59, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: #e2e8f0;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .about-image i {
+            font-size: 10rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            top: 30px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -45px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -45px;
+        }
+
+        .timeline-item h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item .date {
+            background: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tool-item {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.2);
+        }
+
+        .tool-item i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .tool-item h3 {
+            font-size: 1.1rem;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.2);
+        }
+
+        .education-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .education-card .date {
+            background: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .education-card p {
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 0.3rem;
+        }
+
+        .contact-text h3 {
+            margin-bottom: 0.3rem;
+            color: var(--accent);
+        }
+
+        .contact-text p, .contact-text a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-text a:hover {
+            color: var(--accent);
+        }
+
+        .contact-form {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            background: rgba(2, 6, 23, 0.5);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(100, 116, 139, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: -45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Tabitha <span>Wanjiku</span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About Me</a>
+                <a href="#experience">Experience</a>
+                <a href="#tools">Tools</a>
+                <a href="#education">Education & Certification</a>
+                <a href="#contact">Contact me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Cloud Engineer Driven by passion to <span>designing, architecting & deploying</span> cloud solutions.</h1>
+                <p>Creating scalable and secure cloud infrastructures for businesses worldwide</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#experience" class="btn btn-secondary">View Experience</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Get to know my background and expertise in cloud engineering</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Cloud Support Engineer</h3>
+                    <p>As a Cloud Support Engineer with 2+ years expertise in DevOps, System administration, and cloud solution design implementation and troubleshooting, I am dedicated to delivering scalable and secure cloud solutions.</p>
+                    <p>I am passionate about assisting organizations in designing, implementing, and resolving technical challenges within cloud systems.</p>
+                    <p>With hands-on experience in automation tools like Terraform, Ansible, and Resource Manager, as well as version control tools like GitHub,Gitlab I am equipped to drive efficiency. I am also well-versed in agile methodologies and Jira, which foster seamless team collaboration.</p>
+                    <p>Moderate knowledge on virtualization,Containerization,Sripting, Databases & Docker</p>
+                    <p>I have worked on cloud platformsuch as  OCI and Azure.</p>
+                    <p>My commitment to continuous improvement allows me to provide innovative solutions that enhance operational efficiency and support long-term success.</p>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-cloud"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <p>My journey in cloud engineering and system administration</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">Current</div>
+                    <h3>Oracle</h3>
+                    <h4>Cloud Engineer</h4>
+                    <ul>
+                        <li>Resolving customer technical issues related to Linux/Windows systems on cloud</li>
+                        <li>Creating patching plans and documentation of system deployments and upgrade</li>
+                        <li>Ensuring adherence to best practices and strict security compliance for workloads on cloud</li>
+                        <li>Optimizing and planning capacity to ensure efficient utilization of system resources</li>
+                        <li>Designing and implementing cloud-based solutions leveraging Oracle Cloud</li>
+                        <li>Using tools like Terraform and Ansible to automate infrastructure deployment</li>
+                        <li>Advising customer on how best they can maximize their cloud investment</li>
+                        <li>Migrated critical banking systems from VMware environment to cloud</li>
+                        <li>Utilized automation tools like cloud migration and Terraform to speed up projects and migration tasks</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">Dec 2022- Aug 2023</div>
+                    <h3>ICT AUTHORITY</h3>
+                    <h4>IT System Administrator</h4>
+                    <ul>
+                        <li>Coordinated and led a team of 5 developers in implementing online letter trail system using Docker</li>
+                        <li>Collecting customer requirements and designed wireframes and use cases for an intranet project</li>
+                        <li>Server Administration and tuning using Linux</li>
+                        <li>Furthered the adoption of an online ticketing system</li>
+                        <li>Spearheaded the implementation of an endpoint security product as the team led  on about 115 machines</li>
+                        <li>Offering Technical support on the Microsoft Dynamic 365 to diffrent office users</li>
+                        <li>Collaborated with a team of 30 peopl in training youth on digital skills under the Jitume Training program</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">Jan 2021- Nov 2022</div>
+                    <h3>COUNTY GOVERNMENT OF NAKURU</h3>
+                    <h4>IT System Intern</h4>
+                    <ul>
+                        <li>Compiled reports on server and database status, ensuring 99% server uptime and resolving 100% of
+                        network issues</li>
+                        <li>Performed hardening configuration on Linux servers for deployment web application</li>
+                        <li>Maintained and added new functionality to the county website which improved user experience by 5%</li>
+                        <li>Offering Technical support on network related issues</li>
+                        <li>Designing Forms to automate frequent data collection task using excel</li>
+                        <li>Offering Technical support on the Microsoft Dynamic 365 to diffrent office users</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Tools</h2>
+                <p>Technologies and tools I specialize in</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fab fa-github"></i>
+                    <h3>Git</h3>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fab fa-gitlab"></i>
+                    <h3>GitLab</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fab fa-jenkins"></i>
+                    <h3>Jenkins</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Grafana</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fab fa-git-alt"></i>
+                    <h3>GitOps</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-cloud"></i>
+                    <h3>OCI</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fab fa-aws"></i>
+                    <h3>AWS</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-code-branch"></i>
+                    <h3>Terraform</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fab fa-wordpress"></i>
+                    <h3>WordPress</h3>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-cubes"></i>
+                    <h3>Kubernetes</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education & Certifications</h2>
+                <p>My academic background and professional certifications</p>
+            </div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>OCI Networking Professional Cert</h3>
+                    <div class="date">2025</div>
+                    <p>Completed Cloud certification offered by Oracle</p>
+                </div>
+                <div class="education-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Kubernetes Cloud Native Associate</h3>
+                    <div class="date">2025</div>
+                    <p>Completed KCNA certification offered by Linux Foundation in collaboration with Andela</p>
+                </div>
+                <div class="education-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>OCI DevOps Cert</h3>
+                    <div class="date">2025</div>
+                    <p>Completed Cloud certification offered by Oracle</p>
+                </div>
+                <div class="education-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Linux System Administration</h3>
+                    <div class="date">2025</div>
+                    <p>Completed the Linux cert offered by Oracle</p>
+                </div>
+                <div class="education-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Bachelors of Science in Information Technology</h3>
+                    <div class="date">2021</div>
+                    <p>Completed BSc. IT from Kabarak University</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+                <p>Get in touch for collaboration or inquiries</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <a href="mailto:your.email@example.com">tabithawanjikundungu@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-text">
+                            <h3>Location</h3>
+                            <p>Nairobi, Kenya</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-briefcase"></i>
+                        <div class="contact-text">
+                            <h3>Availability</h3>
+                            <p>Available for freelance & full-time positions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/tw-tabitha-wanjiku/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-dev"></i></a>
+            </div>
+            <p class="copyright">© 2025 Tabitha wanjiku Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
